@@ -1,25 +1,16 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import Badge from '@/components/ui/badge/badge.svelte';
-	import { LandPlot, MapPin } from 'lucide-svelte';
+	import { getAvatarColor, getAvatarText } from '@/index';
+	import type { BikeWithGeoInfo } from '@/types';
+	import { LandPlot } from 'lucide-svelte';
 
-	interface Props {
-		title: string;
-		location: string;
-		area: string;
-		status: 'available' | 'unavailable' | 'pending';
-		avatarText: string;
-		avatarColor: string;
-	}
+	type Props = Omit<BikeWithGeoInfo, 'id' | 'latitude' | 'longitude'> & { index: number };
 
-	const {
-		title = '',
-		location = '',
-		area = '',
-		status = 'available',
-		avatarText = '1',
-		avatarColor = 'bg-orange-500'
-	}: Props = $props();
+	const { streetName, distance, status, index }: Props = $props();
+
+	const avatarColor = getAvatarColor(index);
+	const avatarText = getAvatarText(index);
 </script>
 
 <div>
@@ -28,15 +19,11 @@
 			<Avatar.Fallback class={avatarColor}>{avatarText}</Avatar.Fallback>
 		</Avatar.Root>
 		<div class="flex flex-col">
-			<p>{title}</p>
+			<p>{streetName}</p>
 			<div class="flex gap-2">
-				<div class="flex items-center">
-					<MapPin size={16} class="text-muted-foreground" />
-					<span class="text-sm text-muted-foreground">{location}</span>
-				</div>
-				<div class="flex items-center">
+				<div class="flex items-center gap-1">
 					<LandPlot size={16} class="text-muted-foreground" />
-					<span class="text-sm text-muted-foreground">{area}</span>
+					<span class="text-sm text-muted-foreground">{distance.toFixed(2)}</span>
 				</div>
 				<div class="flex items-center">
 					<Badge class="text-xs">{status}</Badge>

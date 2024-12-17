@@ -1,5 +1,6 @@
 node_modules
 bun.lockb
+llms-full.txt
 
 # Output
 .output

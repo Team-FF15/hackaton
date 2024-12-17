@@ -65,3 +65,9 @@ model Setting {
   damageReportFee Float
   pointValue      Float
 }
+
+model StreetCache {
+  id       String @id @default(nanoid())
+  location String @unique
+  street   String
+}

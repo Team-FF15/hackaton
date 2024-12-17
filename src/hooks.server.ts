@@ -2,8 +2,6 @@ import type { Handle } from '@sveltejs/kit';
 import { i18n } from '@/i18n';
 import { sequence } from '@sveltejs/kit/hooks';
 import { lucia } from '@/server/auth';
-import { securityHeaders, rules } from '@islamzaoui/securekit';
-import { env } from '$env/dynamic/private';
 
 const handleParaglide: Handle = i18n.handle();
 
@@ -35,11 +33,4 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-const handleSecurityHeaders = securityHeaders({
-	headers: {
-		...rules.defaultHeaders,
-		'Access-Control-Allow-Origin': env.ORIGIN
-	}
-}).handle;
-
-export const handle: Handle = sequence(handleParaglide, handleAuth, handleSecurityHeaders);
+export const handle: Handle = sequence(handleParaglide, handleAuth);
