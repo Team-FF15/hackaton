@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { Input } from "$lib/components/ui/input";
-	import { Button } from "$lib/components/ui/button";
-	import { Checkbox } from "$lib/components/ui/checkbox";
-	import { Label } from "$lib/components/ui/label";
+	import { fade } from 'svelte/transition';
+	import { Input } from '$lib/components/ui/input';
+	import { Button } from '$lib/components/ui/button';
+	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { Label } from '$lib/components/ui/label';
 
 	// Form state
-	let fullName: string = $state("");
-	let email: string = $state("");
-	let password: string = $state("");
-	let confirmPassword: string = $state("");
+	let fullName: string = $state('');
+	let email: string = $state('');
+	let password: string = $state('');
+	let confirmPassword: string = $state('');
 	let agreeToTerms: boolean = $state(false);
 	let isLoading: boolean = $state(false);
 
@@ -43,13 +43,7 @@
 		<!-- Email input -->
 		<div class="space-y-2">
 			<label for="email" class="text-sm font-medium">Email address</label>
-			<Input
-				id="email"
-				type="email"
-				required
-				bind:value={email}
-				placeholder="Enter your email"
-			/>
+			<Input id="email" type="email" required bind:value={email} placeholder="Enter your email" />
 		</div>
 
 		<!-- Password input -->
