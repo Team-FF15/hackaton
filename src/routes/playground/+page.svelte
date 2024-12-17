@@ -32,7 +32,7 @@
 	] as const;
 </script>
 
-<div class="flex h-[calc(100vh-64px)]">
+<div class="flex h-[100vh]">
 	<!-- Sidebar with property cards -->
 	<div class="w-[400px] flex-shrink-0 overflow-y-auto border-r">
 		<div class="flex flex-col gap-4 p-4">
