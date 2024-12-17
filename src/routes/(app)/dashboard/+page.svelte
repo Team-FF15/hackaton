@@ -83,7 +83,7 @@
 	const totalDistance = $derived(records.reduce((sum, record) => sum + record.distance, 0));
 </script>
 
-<main class="mb-4 grid grid-cols-2 items-center justify-center gap-4 bg-background">
+<main class="mb-4 grid grid-cols-2 items-center justify-center gap-4 bg-white">
 	<div class="">
 		<Chart
 			title="Daily Distance Traveled"
@@ -129,7 +129,7 @@
 					<!-- Timeline connector -->
 					<!-- <div class="absolute bottom-0 left-[11px] top-0 w-[2px] bg-border last:hidden" /> -->
 
-					<div class="relative rounded-lg border bg-card p-2">
+					<div class="relative rounded-lg border bg-white p-2">
 						<!-- Date badge -->
 						<Badge class="mb-2">{new Date(record.date).toLocaleDateString()}</Badge>
 
