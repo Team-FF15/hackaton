@@ -4,7 +4,7 @@
 	let isMobileMenuOpen = $state(false);
 </script>
 
-<main class="w-full min-h-screen bg-background">
+<main class="min-h-screen w-full bg-background">
 	<Navbar bind:isMobileMenuOpen />
 	<Hero />
 </main>

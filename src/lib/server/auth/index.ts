@@ -18,7 +18,8 @@ export const lucia = new Lucia(adapter, {
 			id: attributes.id,
 			username: attributes.username,
 			email: attributes.email,
-			points: attributes.points
+			points: attributes.points,
+			password_hash: attributes.password_hash
 		};
 	}
 });
@@ -30,4 +31,4 @@ declare module 'lucia' {
 	}
 }
 
-type DatabaseUserAttributes = Omit<User, 'password_hash'>;
+type DatabaseUserAttributes = User;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bike } from "lucide-svelte";
+	import { Bike } from 'lucide-svelte';
 	export let title: string;
 	export let subtitle: string;
 </script>
@@ -8,8 +8,8 @@
 	<div class="sm:mx-auto sm:w-full sm:max-w-md">
 		<!-- You can add your logo here -->
 		<div class="flex justify-center">
-			<div class="p-3 bg-primary/10 rounded-full">
-				<Bike class="w-8 h-8 text-primary" />
+			<div class="rounded-full bg-primary/10 p-3">
+				<Bike class="h-8 w-8 text-primary" />
 			</div>
 		</div>
 		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight">

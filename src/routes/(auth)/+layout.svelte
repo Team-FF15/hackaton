@@ -15,8 +15,8 @@
 		<div class="w-full max-w-md space-y-8" in:fly={{ x: 20, duration: 1000 }}>
 			<!-- Logo -->
 			<div class="flex justify-center">
-				<div class="p-3 bg-primary/10 rounded-full">
-					<Bike class="w-8 h-8 text-primary" />
+				<div class="rounded-full bg-primary/10 p-3">
+					<Bike class="h-8 w-8 text-primary" />
 				</div>
 			</div>
 			{@render children?.()}

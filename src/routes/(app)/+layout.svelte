@@ -8,14 +8,15 @@
 
 	let { children, data } = $props();
 
-	let { settings, user } = data;
+	let user = $derived(data.user);
+	let settings = $derived(data.settings);
 
-	setContext('settings', settings);
+	setContext('settings', data.settings);
 </script>
 
 <SidebarProvider>
 	<div class="flex max-h-screen min-h-screen w-screen">
-		<Navbar />
+		<Navbar username={user?.username} email={user?.email} />
 		<main class="flex flex-1 bg-muted py-2 pl-4">
 			<div class="flex h-full w-[100%] flex-col rounded-l-md border bg-white">
 				<div class="flex w-full items-center justify-between border-b p-4">

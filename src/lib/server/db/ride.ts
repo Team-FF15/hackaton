@@ -51,7 +51,7 @@ export async function getTotalDistanceForUser(userId: string) {
 }
 
 export async function getUserRides(userId: string) {
-    return await prisma.ride.findMany({
-        where: { userId }
-    });
+	return await prisma.ride.findMany({
+		where: { userId }
+	});
 }

@@ -33,7 +33,8 @@
 		<Dialog.Header>
 			<Dialog.Title>Are you sure you want to rent this bike?</Dialog.Title>
 			<Dialog.Description>
-				this will cost you <strong>{setting.bookingFee} points</strong> + <strong>{setting.hourlyRate} points</strong> per hour
+				this will cost you <strong>{setting.bookingFee} points</strong> +
+				<strong>{setting.hourlyRate} points</strong> per hour
 			</Dialog.Description>
 		</Dialog.Header>
 		<form class="space-y-6" method="POST" action="?/rent" use:enhance>
@@ -41,7 +42,7 @@
 				<Button type="submit">Rent</Button>
 				<Button type="button" variant="outline" onclick={() => (open = false)}>Cancel</Button>
 			</div>
-			<Form.Field {form} name="bikeId" >
+			<Form.Field {form} name="bikeId">
 				<Form.Control>
 					{#snippet children({ props })}
 						<input value={id} {...props} hidden />

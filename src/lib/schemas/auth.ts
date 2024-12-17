@@ -35,3 +35,26 @@ export const registerSchema = z
 			});
 		}
 	});
+
+export const resetUsernameSchema = z.object({
+	username
+});
+
+export const resetEmailSchema = z.object({
+	email
+});
+
+export const resetPasswordSchema = z
+	.object({
+		currentPassword: password,
+		password,
+		confirmPassword: password
+	})
+	.superRefine(({ confirmPassword, password }, ctx) => {
+		if (confirmPassword !== password) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Passwords do not match'
+			});
+		}
+	});

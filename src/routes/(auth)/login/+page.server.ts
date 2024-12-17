@@ -45,6 +45,6 @@ export const actions = {
 			type: 'success',
 			message: `Welcome back ${user.username}!`
 		} as const;
-		redirect('/', message, event);
+		redirect('/dashboard', message, event);
 	}
 };

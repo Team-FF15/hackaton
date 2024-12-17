@@ -6,7 +6,7 @@
 	import { LandPlot } from 'lucide-svelte';
 	import RentDialog from '@/components/rent/rent-dialog.svelte';
 
-	type Props = Omit<BikeWithGeoInfo,'latitude' | 'longitude'> & { index: number };
+	type Props = Omit<BikeWithGeoInfo, 'latitude' | 'longitude'> & { index: number };
 
 	const { streetName, distance, status, index, id }: Props = $props();
 

@@ -21,10 +21,13 @@ export async function fetchChartData(userId: string) {
 	const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 	const initializeDays = (unit: string): Record<string, DayData> => {
-		return daysOfWeek.reduce((acc, day) => {
-			acc[day] = { day, value: 0, unite: unit };
-			return acc;
-		}, {} as Record<string, DayData>);
+		return daysOfWeek.reduce(
+			(acc, day) => {
+				acc[day] = { day, value: 0, unite: unit };
+				return acc;
+			},
+			{} as Record<string, DayData>
+		);
 	};
 
 	const distanceTraveled = rides.reduce((acc, ride) => {
