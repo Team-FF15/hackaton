@@ -18,3 +18,10 @@ export async function createUser(data: Omit<User, 'id' | 'points'>) {
 		data
 	});
 }
+
+export async function decreaceUserPoints(userId: string, points: number) {
+	return await prisma.user.update({
+		where: { id: userId },
+		data: { points: { decrement: points } }
+	});
+}

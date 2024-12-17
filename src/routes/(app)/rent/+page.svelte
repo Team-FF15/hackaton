@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PropertyCard from '$lib/components/property/property-card.svelte';
+	import PropertyCard from '@/components/property/property-card.svelte';
 	import { MapLibre, Popup, Marker } from 'svelte-maplibre';
 	import { LandPlot } from 'lucide-svelte';
 	import { getAvatarColor, getAvatarText } from '@/index';
@@ -9,7 +9,6 @@
 	import { toast } from 'svelte-sonner';
 	import type { BikeWithGeoInfo } from '@/types';
 
-	let clickedBike = $state('');
 	let myLocation: { lat: number | null; lon: number | null } = $state({
 		lat: null,
 		lon: null
@@ -45,7 +44,7 @@
 	});
 </script>
 
-<div class="flex h-[100vh]">
+<div class="flex h-[90vh] w-full">
 	<!-- Sidebar with property cards -->
 	<div class="w-[400px] flex-shrink-0 overflow-y-auto border-r">
 		<div class="flex flex-col gap-4 p-4">
@@ -54,6 +53,7 @@
 			{:else}
 				{#each bikesNearBy as bike, i}
 					<PropertyCard
+						id={bike.id}
 						streetName={bike.streetName}
 						distance={bike.distance}
 						status={bike.status}
@@ -81,7 +81,6 @@
 				{@const avatarText = getAvatarText(i)}
 				<Marker
 					lngLat={[bike.latitude, bike.longitude]}
-					onclick={() => (clickedBike = bike.id)}
 					class="grid h-8 w-8 place-items-center rounded-full border border-gray-200 {avatarColor} text-black shadow-2xl focus:outline-2 focus:outline-black"
 				>
 					<span>
