@@ -1,7 +1,4 @@
 <script lang="ts">
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import Badge from '@/components/ui/badge/badge.svelte';
-	import { LandPlot, MapPin } from 'lucide-svelte';
 	import PropertyCard from '$lib/components/property/property-card.svelte';
 	import { MapLibre, Popup, Marker } from 'svelte-maplibre';
 	let clickedName = $state('');
@@ -44,7 +41,12 @@
 	const properties = [
 		{
 			title: 'Al-Nasr Street, 256 Apartments',
+			title: 'Al-Nasr Street, 256 Apartments',
 			location: "M'sila",
+			area: '25.6m',
+			status: 'available',
+			avatarText: '1',
+			avatarColor: 'bg-orange-500'
 			area: '25.6m',
 			status: 'available',
 			avatarText: '1',
@@ -57,8 +59,20 @@
 			status: 'pending',
 			avatarText: '2',
 			avatarColor: 'bg-blue-500'
+			title: 'Marina Bay Residence',
+			location: 'Algiers',
+			area: '30.2m',
+			status: 'pending',
+			avatarText: '2',
+			avatarColor: 'bg-blue-500'
 		},
 		{
+			title: 'Garden Heights Complex',
+			location: 'Oran',
+			area: '18.5m',
+			status: 'unavailable',
+			avatarText: '3',
+			avatarColor: 'bg-purple-500'
 			title: 'Garden Heights Complex',
 			location: 'Oran',
 			area: '18.5m',

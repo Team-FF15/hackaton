@@ -3,20 +3,23 @@
 	import Badge from '@/components/ui/badge/badge.svelte';
 	import { LandPlot, MapPin } from 'lucide-svelte';
 
-	const { title = "", location = "", area = "", status = "available", avatarText = "1", avatarColor = "bg-orange-500" } = $props<{
+	interface Props {
 		title: string;
 		location: string;
 		area: string;
-		status: "available" | "unavailable" | "pending";
+		status: 'available' | 'unavailable' | 'pending';
 		avatarText: string;
 		avatarColor: string;
-	}>();
+	}
 
-	const statusColors = {
-		available: "bg-green-500",
-		unavailable: "bg-red-500",
-		pending: "bg-yellow-500"
-	};
+	const {
+		title = '',
+		location = '',
+		area = '',
+		status = 'available',
+		avatarText = '1',
+		avatarColor = 'bg-orange-500'
+	}: Props = $props();
 </script>
 
 <div>
