@@ -47,7 +47,7 @@
 		</div>
 
 		<div class="text-sm">
-			<a href="#" class="font-medium text-blue-600 hover:text-blue-500">Forgot your password?</a>
+			<a href="/forgot-password" class="font-medium text-blue-600 hover:text-blue-500">Forgot your password?</a>
 		</div>
 	</div>
 
@@ -63,6 +63,6 @@
 	<!-- Sign up link -->
 	<p class="mt-2 text-center text-sm text-gray-600">
 		Not a member?
-		<a href="#" class="font-medium text-blue-600 hover:text-blue-500">Sign up now</a>
+		<a href="/signup" class="font-medium text-blue-600 hover:text-blue-500">Sign up now</a>
 	</p>
 </form>
