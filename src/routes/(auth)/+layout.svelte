@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { fade, fly } from "svelte/transition";
-    let { children } = $props();
+	import { fade, fly } from 'svelte/transition';
+	let { children } = $props();
 </script>
+
 <main class="flex min-h-screen w-full bg-slate-50">
 	<!-- Left side with image -->
 	<div class="relative hidden w-1/2 lg:block" in:fade={{ duration: 700 }}>
@@ -15,7 +16,7 @@
 	</div>
 	<div class="flex w-full items-center justify-center p-8 lg:w-1/2">
 		<div class="w-full max-w-md space-y-8" in:fly={{ x: 20, duration: 1000 }}>
-             {@render children?.()}
-        </div>
+			{@render children?.()}
+		</div>
 	</div>
 </main>

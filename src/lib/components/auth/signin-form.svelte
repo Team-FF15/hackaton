@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { Input } from "$lib/components/ui/input";
-	import { Button } from "$lib/components/ui/button";
-	import { Checkbox } from "$lib/components/ui/checkbox";
-	import { Label } from "$lib/components/ui/label";
+	import { fade } from 'svelte/transition';
+	import { Input } from '$lib/components/ui/input';
+	import { Button } from '$lib/components/ui/button';
+	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { Label } from '$lib/components/ui/label';
 
 	// Form state
-	let email: string = $state("");
-	let password: string = $state("");
+	let email: string = $state('');
+	let password: string = $state('');
 	let rememberMe: boolean = $state(false);
 	let isLoading: boolean = $state(false);
 
@@ -35,7 +35,13 @@
 		<!-- Password input -->
 		<div class="space-y-2">
 			<label for="password" class="text-sm font-medium">Password</label>
-			<Input id="password" type="password" required bind:value={password} placeholder="Enter your password" />
+			<Input
+				id="password"
+				type="password"
+				required
+				bind:value={password}
+				placeholder="Enter your password"
+			/>
 		</div>
 	</div>
 
@@ -52,7 +58,9 @@
 		</div>
 
 		<div class="text-sm">
-			<a href="/forgot-password" class="font-medium text-primary hover:underline">Forgot your password?</a>
+			<a href="/forgot-password" class="font-medium text-primary hover:underline"
+				>Forgot your password?</a
+			>
 		</div>
 	</div>
 
