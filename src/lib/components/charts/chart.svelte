@@ -10,13 +10,13 @@
 	}: {
 		title: string;
 		subtext: string;
-		data: Array<{ month: string; value: number }>;
+		data: Array<{ day: string; value: number; unite?: string }>;
 	} = $props();
 
 	// Calculate the maximum value for scaling
 	const maxValue = $derived(Math.max(...data.map((d) => d.value)));
 
-	// Calculate percentage for current month compared to previous
+	// Calculate percentage for current day compared to previous
 	const growth = $derived(
 		data.length < 2
 			? 0
@@ -61,9 +61,10 @@
 					<div class="relative w-full">
 						<!-- Tooltip -->
 						<div
-							class="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 transform rounded bg-foreground px-2 py-1 text-xs text-background group-hover:block"
+							class="absolute bottom-full left-1/2 mb-2 hidden w-max -translate-x-1/2 transform rounded bg-foreground px-2 py-1 text-xs text-background group-hover:block"
 						>
 							{formatValue(item.value)}
+							{item.unite}
 						</div>
 						<!-- Bar -->
 						<div
@@ -71,7 +72,7 @@
 							style:height="{(item.value / maxValue) * 180}px"
 						/>
 					</div>
-					<span class="text-xs text-muted-foreground">{item.month}</span>
+					<span class="text-xs text-muted-foreground">{item.day}</span>
 				</div>
 			{/each}
 		</div>
