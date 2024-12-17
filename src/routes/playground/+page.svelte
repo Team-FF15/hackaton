@@ -1,84 +1,54 @@
 <script lang="ts">
 	import PropertyCard from '$lib/components/property/property-card.svelte';
 	import { MapLibre, Popup, Marker } from 'svelte-maplibre';
+	import { LandPlot, MapPin } from 'lucide-svelte';
+	import Badge from '@/components/ui/badge/badge.svelte';
+
 	let clickedName = $state('');
-	const markers: Array<{
-		lngLat: [number, number];
-		label: string;
-		name: string;
-	}> = [
-		{
-			lngLat: [4.5, 35.7],
-			label: 'SEA',
-			name: 'Seattle'
-		},
-		{
-			lngLat: [-159.3438, 21.9788],
-			label: 'LIH',
-			name: 'Lihue'
-		},
-		{
-			lngLat: [2.5479, 49.0097],
-			label: 'CDG',
-			name: 'Paris Charles de Gaulle'
-		},
-		{
-			lngLat: [-58.5348, -34.82],
-			label: 'EZE',
-			name: 'Ministro Pistarini'
-		},
-		{
-			lngLat: [18.6021, -33.9715],
-			label: 'CPT',
-			name: 'Cape Town'
-		},
-		{
-			lngLat: [121.0165, 14.5123],
-			label: 'MNL',
-			name: 'Ninoy Aquino'
-		}
+	function getRandomInt(min: number, max: number) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	const colors = [
+		{ bg: 'bg-orange-500', text: 'text-black-500' },
+		{ bg: 'bg-blue-500', text: 'text-black-500' },
+		{ bg: 'bg-purple-500', text: 'text-black-500' },
+		{ bg: 'bg-green-500', text: 'text-black-500' },
+		{ bg: 'bg-red-500', text: 'text-black-500' },
+		{ bg: 'bg-yellow-500', text: 'text-black-500' },
+		{ bg: 'bg-pink-500', text: 'text-black-500' },
+		{ bg: 'bg-cyan-500', text: 'text-black-500' }
 	];
+
 	const properties = [
 		{
 			title: 'Al-Nasr Street, 256 Apartments',
-			title: 'Al-Nasr Street, 256 Apartments',
 			location: "M'sila",
 			area: '25.6m',
+			lngLat: [4.5782230174019955, 35.73972284832018],
 			status: 'available',
 			avatarText: '1',
-			avatarColor: 'bg-orange-500'
-			area: '25.6m',
-			status: 'available',
-			avatarText: '1',
-			avatarColor: 'bg-orange-500'
+			avatarColor: colors[1].bg,
+			textColor: colors[1].text
 		},
 		{
 			title: 'Marina Bay Residence',
 			location: 'Algiers',
 			area: '30.2m',
+			lngLat: [4.5482230174019955, 35.93972284832018],
 			status: 'pending',
 			avatarText: '2',
-			avatarColor: 'bg-blue-500'
-			title: 'Marina Bay Residence',
-			location: 'Algiers',
-			area: '30.2m',
-			status: 'pending',
-			avatarText: '2',
-			avatarColor: 'bg-blue-500'
+			avatarColor: colors[2].bg,
+			textColor: colors[2].text
 		},
 		{
 			title: 'Garden Heights Complex',
 			location: 'Oran',
 			area: '18.5m',
+			lngLat: [4.5582230174019955, 35.73972284832018],
 			status: 'unavailable',
 			avatarText: '3',
-			avatarColor: 'bg-purple-500'
-			title: 'Garden Heights Complex',
-			location: 'Oran',
-			area: '18.5m',
-			status: 'unavailable',
-			avatarText: '3',
-			avatarColor: 'bg-purple-500'
+			avatarColor: colors[3].bg,
+			textColor: colors[3].text
 		}
 	] as const;
 </script>
@@ -111,18 +81,34 @@
 		standardControls
 		style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
 	>
-		{#each markers as { lngLat, label, name } (label)}
+		{#each properties as { title, location, area, lngLat, status, avatarText, avatarColor } (lngLat)}
+			(title)}
 			<Marker
-				{lngLat}
-				onclick={() => (clickedName = name)}
-				class="grid h-8 w-8 place-items-center rounded-full border border-gray-200 bg-red-300 text-black shadow-2xl focus:outline-2 focus:outline-black"
+				lngLat={[...lngLat]}
+				onclick={() => (clickedName = title)}
+				class="grid h-8 w-8 place-items-center rounded-full border border-gray-200 {avatarColor} text-black shadow-2xl focus:outline-2 focus:outline-black"
 			>
 				<span>
-					{label}
+					{avatarText}
 				</span>
 
 				<Popup openOn="hover" offset={[0, -10]}>
-					<div class="text-lg font-bold text-black">{name}</div>
+					<div class="flex flex-col">
+						<p>{title}</p>
+						<div class="flex gap-2">
+							<div class="flex items-center">
+								<MapPin size={16} class="text-muted-foreground" />
+								<span class="text-sm text-muted-foreground">{location}</span>
+							</div>
+							<div class="flex items-center">
+								<LandPlot size={16} class="text-muted-foreground" />
+								<span class="text-sm text-muted-foreground">{area}</span>
+							</div>
+							<div class="flex items-center">
+								<Badge class="text-xs">{status}</Badge>
+							</div>
+						</div>
+					</div>
 				</Popup>
 			</Marker>
 		{/each}
