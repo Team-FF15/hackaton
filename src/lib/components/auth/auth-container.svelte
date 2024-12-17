@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Bike } from "lucide-svelte";
 	export let title: string;
 	export let subtitle: string;
 </script>
@@ -6,7 +7,11 @@
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-md">
 		<!-- You can add your logo here -->
-		<img class="mx-auto h-12 w-auto" src="/logo.png" alt="Your Logo" />
+		<div class="flex justify-center">
+			<div class="p-3 bg-primary/10 rounded-full">
+				<Bike class="w-8 h-8 text-primary" />
+			</div>
+		</div>
 		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight">
 			{title}
 		</h2>
