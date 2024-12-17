@@ -46,11 +46,11 @@
 <p>Longitude: {longitude}</p>
 
 {#if latitude && longitude}
-    {#await fetchNearestBikes(longitude, latitude)}
-        loading
-    {:then result} 
-        {#if result.success}
-            <pre>{JSON.stringify(result.data, null, 2)}</pre>
-        {/if}
-    {/await}
+	{#await fetchNearestBikes(longitude, latitude)}
+		loading
+	{:then result}
+		{#if result.success}
+			<pre>{JSON.stringify(result.data, null, 2)}</pre>
+		{/if}
+	{/await}
 {/if}

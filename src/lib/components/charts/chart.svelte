@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { slide } from "svelte/transition";
-	import { ArrowUpIcon } from "lucide-svelte";
+	import { slide } from 'svelte/transition';
+	import { ArrowUpIcon } from 'lucide-svelte';
 
 	// Props for the component
 	let {
-		title = "Chart Title",
-		subtext = "",
-		data = [],
+		title = 'Chart Title',
+		subtext = '',
+		data = []
 	}: {
 		title: string;
 		subtext: string;
@@ -20,7 +20,9 @@
 	const growth = $derived(
 		data.length < 2
 			? 0
-			: ((data[data.length - 1].value - data[data.length - 2].value) / data[data.length - 2].value) * 100
+			: ((data[data.length - 1].value - data[data.length - 2].value) /
+					data[data.length - 2].value) *
+					100
 	);
 
 	// Format numbers with K suffix
@@ -44,8 +46,8 @@
 			{formatValue(data[data.length - 1]?.value || 0)}
 		</span>
 		{#if growth !== 0}
-			<span class={`flex items-center text-sm ${growth > 0 ? "text-green-500" : "text-red-500"}`}>
-				<ArrowUpIcon class={`h-4 w-4 ${growth < 0 ? "rotate-180" : ""}`} />
+			<span class={`flex items-center text-sm ${growth > 0 ? 'text-green-500' : 'text-red-500'}`}>
+				<ArrowUpIcon class={`h-4 w-4 ${growth < 0 ? 'rotate-180' : ''}`} />
 				{Math.abs(growth).toFixed(1)}%
 			</span>
 		{/if}
@@ -58,11 +60,16 @@
 				<div class="group flex w-full flex-col items-center gap-2">
 					<div class="relative w-full">
 						<!-- Tooltip -->
-						<div class="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 transform rounded bg-foreground px-2 py-1 text-xs text-background group-hover:block">
+						<div
+							class="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 transform rounded bg-foreground px-2 py-1 text-xs text-background group-hover:block"
+						>
 							{formatValue(item.value)}
 						</div>
 						<!-- Bar -->
-						<div class="w-full rounded-t bg-primary/80 transition-all duration-300 ease-in-out group-hover:bg-primary" style:height="{(item.value / maxValue) * 180}px" />
+						<div
+							class="w-full rounded-t bg-primary/80 transition-all duration-300 ease-in-out group-hover:bg-primary"
+							style:height="{(item.value / maxValue) * 180}px"
+						/>
 					</div>
 					<span class="text-xs text-muted-foreground">{item.month}</span>
 				</div>
