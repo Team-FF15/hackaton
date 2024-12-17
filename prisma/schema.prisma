@@ -14,10 +14,14 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  username      String    @unique
+  id            String @id @default(nanoid())
+  username      String @unique
+  email         String @unique
   password_hash String
-  sessions      Session[]
+  points        Int
+
+  sessions Session[]
+  Ride     Ride[]
 }
 
 model Session {
@@ -26,4 +30,38 @@ model Session {
   expiresAt DateTime
 
   user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Bike {
+  id        String @id @default(nanoid())
+  longitude Float
+  latitude  Float
+  status    Status
+  Ride      Ride[]
+}
+
+enum Status {
+  AVAILABLE
+  UNAVAILABLE
+}
+
+model Ride {
+  id        String   @id @default(nanoid())
+  userId    String
+  bikeId    String
+  startedAt DateTime
+  endedAt   DateTime
+  distance  Float
+  totalCost Float
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+  bike Bike @relation(references: [id], fields: [bikeId], onDelete: Cascade)
+}
+
+model Setting {
+  id              String @id @default(nanoid())
+  bookingFee      Float
+  hourlyRate      Float
+  damageReportFee Float
+  pointValue      Float
 }

@@ -20,8 +20,10 @@
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
+		"@faker-js/faker": "^9.3.0",
 		"@islamzaoui/securekit": "^1.1.0",
 		"@lucia-auth/adapter-prisma": "^4.0.1",
+		"@node-rs/argon2": "^2.0.2",
 		"@prisma/client": "^6.0.1",
 		"@sveltejs/adapter-vercel": "^5.5.2",
 		"@sveltejs/kit": "^2.9.0",
