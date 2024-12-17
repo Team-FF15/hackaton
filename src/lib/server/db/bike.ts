@@ -74,7 +74,7 @@ export async function getNearestBikes(
 
 	const bikesWithGeoInfo = await Promise.all(
 		bikes.map(async (bike) => {
-			const distance = haversineDistance(latitude, longitude, bike.latitude, bike.longitude)
+			const distance = haversineDistance(latitude, longitude, bike.latitude, bike.longitude);
 			const streetName = await getStreetName(bike.latitude, bike.longitude);
 			return {
 				...bike,
@@ -85,7 +85,7 @@ export async function getNearestBikes(
 	);
 
 	console.log(bikesWithGeoInfo);
-    bikesWithGeoInfo.sort((a, b) => a.distance - b.distance);
+	bikesWithGeoInfo.sort((a, b) => a.distance - b.distance);
 
 	return bikesWithGeoInfo;
 }
