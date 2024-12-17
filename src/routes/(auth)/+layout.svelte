@@ -7,11 +7,7 @@
 	<!-- Left side with image -->
 	<div class="relative hidden w-1/2 lg:block" in:fade={{ duration: 700 }}>
 		<div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400">
-			<img
-				src="$assets/ui-placeholder.png"
-				alt="Auth"
-				class="h-full w-full object-cover opacity-50 mix-blend-overlay"
-			/>
+			<img src="" alt="Auth" class="h-full w-full object-cover opacity-50 mix-blend-overlay" />
 		</div>
 	</div>
 	<div class="flex w-full items-center justify-center p-8 lg:w-1/2">
