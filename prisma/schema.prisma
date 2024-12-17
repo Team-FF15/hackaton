@@ -18,7 +18,7 @@ model User {
   username      String @unique
   email         String @unique
   password_hash String
-  points        Int
+  points        Int    @default(50)
 
   sessions Session[]
   Ride     Ride[]
@@ -36,7 +36,7 @@ model Bike {
   id        String @id @default(nanoid())
   longitude Float
   latitude  Float
-  status    Status
+  status    Status @default(AVAILABLE)
   Ride      Ride[]
 }
 

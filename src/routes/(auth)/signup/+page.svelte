@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
-	import { UserPlus } from 'lucide-svelte';
-	import SignupForm from '$lib/components/auth/signup-form.svelte';
+	import SignupForm from '@/components/auth/signup-form.svelte';
+
+	let { data } = $props();
 </script>
 
-<SignupForm />
+<SignupForm data={data.form} />

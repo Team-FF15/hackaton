@@ -1,79 +1,60 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { Input } from '$lib/components/ui/input';
-	import { Button } from '$lib/components/ui/button';
-	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { Label } from '$lib/components/ui/label';
+	import * as Form from '@/components/ui/form';
+	import { Input } from '@/components/ui/input';
+	import { Button } from '@/components/ui/button';
+	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
+	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { loginSchema } from '@/schemas/auth';
 
-	// Form state
-	let email: string = $state('');
-	let password: string = $state('');
-	let rememberMe: boolean = $state(false);
-	let isLoading: boolean = $state(false);
+	interface Props {
+		data: SuperValidated<Infer<typeof loginSchema>>;
+	}
 
-	/** Handle form submission */
-	const handleSubmit = (e: SubmitEvent) => {
-		e.preventDefault();
-		isLoading = true;
+	let { data }: Props = $props();
 
-		// Simulate API call
-		setTimeout(() => {
-			console.log({ email, password, rememberMe });
-			isLoading = false;
-		}, 2000);
-	};
+	const form = superForm(data, {
+		validators: zodClient(loginSchema)
+	});
+
+	const { form: formData, enhance, delayed } = form;
 </script>
 
-<form class="mt-8 space-y-6" onsubmit={handleSubmit}>
+<form class="mt-8 space-y-6" method="POST" use:enhance>
 	<div class="space-y-4 rounded-md shadow-sm">
-		<!-- Email input -->
-		<div class="space-y-2">
-			<label for="email" class="text-sm font-medium">Email address</label>
-			<Input id="email" type="email" required bind:value={email} placeholder="Enter your email" />
-		</div>
+		<!-- User Name input -->
+		<Form.Field {form} name="username" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Username</Form.Label>
+					<Input {...props} bind:value={$formData.username} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
 		<!-- Password input -->
-		<div class="space-y-2">
-			<label for="password" class="text-sm font-medium">Password</label>
-			<Input
-				id="password"
-				type="password"
-				required
-				bind:value={password}
-				placeholder="Enter your password"
-			/>
-		</div>
-	</div>
-
-	<!-- Remember me and Forgot password -->
-	<div class="flex items-center justify-between">
-		<div class="flex items-center gap-2">
-			<Checkbox id="remember-me" bind:checked={rememberMe} />
-			<Label
-				for="remember-me"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Remember me
-			</Label>
-		</div>
-
-		<div class="text-sm">
-			<a href="/forgot-password" class="font-medium text-primary hover:underline"
-				>Forgot your password?</a
-			>
-		</div>
+		<Form.Field {form} name="password" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Password</Form.Label>
+					<Input type="password" {...props} bind:value={$formData.password} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 	</div>
 
 	<!-- Submit button -->
-	<Button type="submit" class="w-full" disabled={isLoading}>
-		{#if isLoading}
+	<Button type="submit" class="w-full" disabled={$delayed}>
+		{#if !delayed}
 			<span transition:fade>Loading...</span>
 		{:else}
 			Sign in
 		{/if}
 	</Button>
 
-	<!-- Sign up link -->
+	<!-- Sign in link -->
 	<p class="mt-2 text-center text-sm text-muted-foreground">
 		Don't have an account?
 		<a href="/signup" class="font-medium text-primary hover:underline"> Sign up </a>

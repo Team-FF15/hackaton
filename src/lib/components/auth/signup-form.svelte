@@ -1,90 +1,97 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { Input } from '$lib/components/ui/input';
-	import { Button } from '$lib/components/ui/button';
-	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { Label } from '$lib/components/ui/label';
+	import * as Form from '@/components/ui/form';
+	import { Input } from '@/components/ui/input';
+	import { Button } from '@/components/ui/button';
+	import { Checkbox } from '@/components/ui/checkbox';
+	import { Label } from '@/components/ui/label';
+	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
+	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { registerSchema } from '@/schemas/auth';
 
-	// Form state
-	let fullName: string = $state('');
-	let email: string = $state('');
-	let password: string = $state('');
-	let confirmPassword: string = $state('');
-	let agreeToTerms: boolean = $state(false);
-	let isLoading: boolean = $state(false);
+	interface Props {
+		data: SuperValidated<Infer<typeof registerSchema>>;
+	}
 
-	/** Handle form submission */
-	const handleSubmit = (e: SubmitEvent) => {
-		e.preventDefault();
-		isLoading = true;
+	let { data }: Props = $props();
 
-		// Simulate API call
-		setTimeout(() => {
-			console.log({ fullName, email, password, confirmPassword, agreeToTerms });
-			isLoading = false;
-		}, 2000);
-	};
+	const form = superForm(data, {
+		validators: zodClient(registerSchema)
+	});
+
+	const { form: formData, enhance, delayed } = form;
 </script>
 
-<form class="mt-8 space-y-6" onsubmit={handleSubmit}>
+<form class="mt-8 space-y-6" method="POST" use:enhance>
 	<div class="space-y-4 rounded-md shadow-sm">
-		<!-- Full Name input -->
-		<div class="space-y-2">
-			<label for="fullName" class="text-sm font-medium">Username</label>
-			<Input
-				id="fullName"
-				type="text"
-				required
-				bind:value={fullName}
-				placeholder="Enter your full name"
-			/>
-		</div>
+		<!-- User Name input -->
+		<Form.Field {form} name="username" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Username</Form.Label>
+					<Input {...props} bind:value={$formData.username} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
 		<!-- Email input -->
-		<div class="space-y-2">
-			<label for="email" class="text-sm font-medium">Email address</label>
-			<Input id="email" type="email" required bind:value={email} placeholder="Enter your email" />
-		</div>
+		<Form.Field {form} name="email" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Email</Form.Label>
+					<Input type="email" {...props} bind:value={$formData.email} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
 		<!-- Password input -->
-		<div class="space-y-2">
-			<label for="password" class="text-sm font-medium">Password</label>
-			<Input
-				id="password"
-				type="password"
-				required
-				bind:value={password}
-				placeholder="Create a password"
-			/>
-		</div>
+		<Form.Field {form} name="password" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Password</Form.Label>
+					<Input type="password" {...props} bind:value={$formData.password} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
 		<!-- Confirm Password input -->
-		<div class="space-y-2">
-			<label for="confirmPassword" class="text-sm font-medium">Confirm Password</label>
-			<Input
-				id="confirmPassword"
-				type="password"
-				required
-				bind:value={confirmPassword}
-				placeholder="Confirm your password"
-			/>
-		</div>
+		<Form.Field {form} name="confirmPassword" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Confirm Password</Form.Label>
+					<Input type="password" {...props} bind:value={$formData.confirmPassword} />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 	</div>
 
 	<!-- Terms and Conditions -->
 	<div class="flex items-center gap-2">
-		<Checkbox id="terms" bind:checked={agreeToTerms} />
-		<Label
-			for="terms"
-			class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-		>
-			I agree to the <a href="/terms" class="text-primary hover:underline">Terms and Conditions</a>
-		</Label>
+		<Form.Field {form} name="terms" class="space-y-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Checkbox {...props} bind:checked={$formData.terms} />
+					<Label
+						for="terms"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						I agree to the <a href="/terms" class="text-primary hover:underline"
+							>Terms and Conditions</a
+						>
+					</Label>
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 	</div>
 
 	<!-- Submit button -->
-	<Button type="submit" class="w-full" disabled={isLoading || !agreeToTerms}>
-		{#if isLoading}
+	<Button type="submit" class="w-full" disabled={!$formData.terms || $delayed}>
+		{#if !delayed}
 			<span transition:fade>Loading...</span>
 		{:else}
 			Sign up
