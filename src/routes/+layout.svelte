@@ -34,7 +34,7 @@
 	});
 </script>
 
-<ModeWatcher />
+<ModeWatcher defaultMode={'light'} />
 <Toaster richColors />
 
 <ParaglideJS {i18n}>
