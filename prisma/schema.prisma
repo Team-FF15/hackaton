@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id            String @id
+  id            String @id @default(nanoid())
   username      String @unique
   email         String @unique
   password_hash String
@@ -33,7 +33,7 @@ model Session {
 }
 
 model Bike {
-  id        String @id
+  id        String @id @default(nanoid())
   longitude Float
   latitude  Float
   status    Status
@@ -46,7 +46,7 @@ enum Status {
 }
 
 model Ride {
-  id        String   @id
+  id        String   @id @default(nanoid())
   userId    String
   bikeId    String
   startedAt DateTime
@@ -59,7 +59,7 @@ model Ride {
 }
 
 model Setting {
-  id              String @id
+  id              String @id @default(nanoid())
   bookingFee      Float
   hourlyRate      Float
   damageReportFee Float
