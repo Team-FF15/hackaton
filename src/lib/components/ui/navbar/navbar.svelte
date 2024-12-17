@@ -35,7 +35,7 @@
         <div class="p-4">
           <div class="flex items-center gap-3">
             <Avatar>
-              <AvatarFallback>{userName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              <AvatarFallback class="bg-orange-500 text-white">{userName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
             <div class="flex-1 text-sm">
               <p class="font-medium">{userName}</p>
