@@ -1,10 +1,8 @@
 <!-- Sidebar.svelte -->
 <script lang="ts">
     import { Avatar, AvatarFallback } from "$lib/components/ui/avatar";
-    import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "$lib/components/ui/dropdown-menu";
-    import { Separator } from "$lib/components/ui/separator";
     import * as Sidebar from "$lib/components/ui/sidebar";
-    import { Bike, Settings, AlertCircle, LogOut, LayoutDashboard, FileText } from "lucide-svelte";
+    import { Bike, Settings, LogOut, LayoutDashboard, FileText } from "lucide-svelte";
     
     export let userName = "John Doe";
     export let userEmail = "john@example.com";
@@ -32,7 +30,12 @@
         </nav>
   
         <!-- User section -->
-        <div class="p-4">
+        <div class="p-4 space-y-2">
+          <!-- Settings Link -->
+          <a href="/settings" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-accent">
+            <Settings class="h-4 w-4" />
+            Settings
+          </a>
           <div class="flex items-center gap-3">
             <Avatar>
               <AvatarFallback class="bg-orange-500 text-white">{userName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
@@ -41,25 +44,9 @@
               <p class="font-medium">{userName}</p>
               <p class="text-muted-foreground">{userEmail}</p>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger class="cursor-pointer">
-                <Settings class="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Settings class="w-4 h-4 mr-2" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <AlertCircle class="w-4 h-4 mr-2" />
-                  Report an issue
-                </DropdownMenuItem>
-                <DropdownMenuItem class="text-destructive">
-                  <LogOut class="w-4 h-4 mr-2" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <button class="flex items-center justify-center h-8 w-8 rounded-lg text-red-500 hover:bg-red-100 transition-colors">
+              <LogOut class="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
