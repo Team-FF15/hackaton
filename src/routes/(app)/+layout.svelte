@@ -8,7 +8,7 @@
 
 	let { children, data } = $props();
 
-	let { settings } = data;
+	let { settings, user } = data;
 
 	setContext('settings', settings);
 </script>
@@ -19,9 +19,11 @@
 		<main class="flex flex-1 bg-muted py-2 pl-4">
 			<div class="flex h-full w-[100%] flex-col rounded-l-md border bg-white">
 				<div class="flex w-full items-center justify-between border-b p-4">
-					<div class="flex items-center justify-between">
-						<Badge class="text-md"><Coins size={16} class="mr-2" />19000 coins</Badge>
-					</div>
+					{#if user}
+						<div class="flex items-center justify-between">
+							<Badge class="text-md"><Coins size={16} class="mr-2" />{user.points} coins</Badge>
+						</div>
+					{/if}
 					<div>
 						<Button variant="outline" size="icon"><Bell size={16} /></Button>
 						<Button><FileDown size={16} class="mr-1" />Export data</Button>

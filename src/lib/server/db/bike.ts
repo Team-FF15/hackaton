@@ -89,3 +89,7 @@ export async function getNearestBikes(
 
 	return bikesWithGeoInfo;
 }
+
+export async function isBikeExists(bikeId: string) {
+	return (await prisma.bike.findUnique({ where: { id: bikeId } })) !== null;
+}

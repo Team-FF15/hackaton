@@ -16,7 +16,9 @@ export const lucia = new Lucia(adapter, {
 	getUserAttributes: (attributes) => {
 		return {
 			id: attributes.id,
-			username: attributes.username
+			username: attributes.username,
+			email: attributes.email,
+			points: attributes.points
 		};
 	}
 });

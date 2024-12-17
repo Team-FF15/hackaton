@@ -4,7 +4,7 @@ import { fail, setError, superValidate } from 'sveltekit-superforms';
 import { rentSchema } from '@/schemas/rent';
 import { newRideForUser } from '@/server/db/ride';
 import { redirect } from 'sveltekit-flash-message/server';
-import { decreaceUserPoints, userHaveNegativePoints } from '@/server/db/user';
+import { decreaceUserPoints } from '@/server/db/user';
 import { isBikeExists } from '@/server/db/bike';
 
 export const load = (async (event) => {
@@ -24,10 +24,8 @@ export const actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		if (await userHaveNegativePoints(event.locals.session.userId))
-			redirect('/rent', { type: 'warning', message: 'You have negative points' }, event);
-
 		if (!(await isBikeExists(form.data.bikeId))) {
+			console.log('Bike not found', `id: ${form.data.bikeId}`);
 			return setError(form, 'bikeId', 'Bike not found');
 		}
 

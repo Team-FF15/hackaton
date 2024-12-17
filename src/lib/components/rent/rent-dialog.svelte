@@ -41,10 +41,10 @@
 				<Button type="submit">Rent</Button>
 				<Button type="button" variant="outline" onclick={() => (open = false)}>Cancel</Button>
 			</div>
-			<Form.Field {form} name="bikeId" hidden>
+			<Form.Field {form} name="bikeId" >
 				<Form.Control>
 					{#snippet children({ props })}
-						<input {...props} bind:value={$formData.bikeId} />
+						<input value={id} {...props} hidden />
 					{/snippet}
 				</Form.Control>
 				<Form.FieldErrors />

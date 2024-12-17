@@ -23,6 +23,10 @@
             <LayoutDashboard class="h-4 w-4" />
             Dashboard
           </a>
+          <a href="/rent" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-accent">
+            <Bike class="h-4 w-4" />
+            Rent a Bike
+          </a>
           <a href="/tickets" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-accent">
             <FileText class="h-4 w-4" />
             Tickets

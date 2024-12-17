@@ -25,3 +25,8 @@ export async function decreaceUserPoints(userId: string, points: number) {
 		data: { points: { decrement: points } }
 	});
 }
+
+export async function userHaveNegativePoints(userId: string) {
+	const points = (await prisma.user.findUnique({ where: { id: userId } }))?.points || 0;
+	return points < 0;
+}

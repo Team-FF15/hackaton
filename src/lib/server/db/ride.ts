@@ -42,3 +42,16 @@ export async function newRideForUser(userId: string, bikeId: string) {
 		}
 	});
 }
+
+export async function getTotalDistanceForUser(userId: string) {
+	return await prisma.ride.aggregate({
+		_sum: { distance: true },
+		where: { userId }
+	});
+}
+
+export async function getUserRides(userId: string) {
+    return await prisma.ride.findMany({
+        where: { userId }
+    });
+}
